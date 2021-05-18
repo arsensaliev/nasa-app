@@ -1,15 +1,15 @@
-package arsensaliev.io.movieapp.ui.fragment.movies
+package arsensaliev.io.nasaapp.ui.fragment.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import arsensaliev.io.movieapp.databinding.FragmentMoviesBinding
-import arsensaliev.io.movieapp.mvp.presenter.main.HomePresenter
-import arsensaliev.io.movieapp.ui.adapter.MoviesRVAdapter
-import arsensaliev.io.nasaapp.mvp.view.fragment.home.HomeView
+import arsensaliev.io.nasaapp.R
+import arsensaliev.io.nasaapp.databinding.FragmentHomeBinding
+import arsensaliev.io.nasaapp.mvp.presenter.home.HomePresenter
+import arsensaliev.io.nasaapp.mvp.view.home.HomeView
 import arsensaliev.io.nasaapp.ui.App
 import arsensaliev.io.nasaapp.ui.BackButtonListener
+import coil.load
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -20,29 +20,13 @@ class HomeFragment : MvpAppCompatFragment(), HomeView, BackButtonListener {
         }
     }
 
-    private var ui: FragmentMoviesBinding? = null
-    private var adapter: MoviesRVAdapter? = null
+    private var ui: FragmentHomeBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentMoviesBinding.inflate(inflater, container, false).also { ui = it }.root
-
-    override fun init() {
-        val mLayoutManager = LinearLayoutManager(requireContext())
-        mLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        ui?.rvMovies?.layoutManager = mLayoutManager
-        adapter = MoviesRVAdapter(presenter.moviesListPresenter).apply {
-            App.instance.appComponent.inject(this)
-        }
-        ui?.rvMovies?.adapter = adapter
-    }
-
-    override fun updateList() {
-        adapter?.notifyDataSetChanged()
-    }
-
+    ) = FragmentHomeBinding.inflate(inflater, container, false).also { ui = it }.root
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -53,6 +37,15 @@ class HomeFragment : MvpAppCompatFragment(), HomeView, BackButtonListener {
     override fun backPressed(): Boolean = presenter.backClick()
 
     companion object {
-        fun newInstance() = MoviesFragment().apply {}
+        fun newInstance() = HomeFragment().apply {}
+    }
+
+    override fun setImage(url: String) {
+        ui?.imageView?.load(url) {
+            lifecycle(this@HomeFragment)
+            error(R.drawable.ic_baseline_error_outline_24)
+            placeholder(R.drawable.ic_image)
+        }
+
     }
 }

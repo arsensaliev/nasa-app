@@ -1,7 +1,7 @@
-package arsensaliev.io.movieapp.di.module.cicerone
+package arsensaliev.io.nasaapp.di.module.cicerone
 
-import arsensaliev.io.movieapp.mvp.model.navigation.IScreens
-import arsensaliev.io.movieapp.ui.navigation.AndroidScreens
+import arsensaliev.io.nasaapp.mvp.model.navigation.IScreens
+import arsensaliev.io.nasaapp.ui.navigation.AndroidScreens
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router

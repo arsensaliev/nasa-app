@@ -1,10 +1,10 @@
-package arsensaliev.io.movieapp.ui.navigation
+package arsensaliev.io.nasaapp.ui.navigation
 
-import arsensaliev.io.movieapp.mvp.model.navigation.IScreens
-import arsensaliev.io.movieapp.ui.fragment.movies.MoviesFragment
+import arsensaliev.io.nasaapp.mvp.model.navigation.IScreens
+import arsensaliev.io.nasaapp.ui.fragment.home.HomeFragment
 import com.github.terrakok.cicerone.Screen
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 class AndroidScreens : IScreens {
-    override fun main(): Screen = FragmentScreen { MainFragment.newInstance() }
+    override fun home(): Screen = FragmentScreen { HomeFragment.newInstance() }
 }

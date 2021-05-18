@@ -29,7 +29,7 @@ android {
     buildTypes.each {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("app.properties").newDataInputStream())
-        def nasaApiKey  = properties.getProperty("NASA_API_KEY", "")
+        def nasaApiKey = properties.getProperty("NASA_API_KEY", "")
         it.buildConfigField "String", "NASA_API_KEY", nasaApiKey
     }
 
@@ -39,6 +39,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
     }
 }
 

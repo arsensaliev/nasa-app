@@ -1,7 +1,7 @@
-package arsensaliev.io.nasaapp.mvp.view.fragment.home
+package arsensaliev.io.nasaapp.mvp.view.main
 
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle
 
 @AddToEndSingle
-interface HomeView : MvpView
+interface MainView : MvpView
