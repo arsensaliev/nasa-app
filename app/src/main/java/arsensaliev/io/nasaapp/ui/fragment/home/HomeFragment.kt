@@ -11,13 +11,20 @@ import arsensaliev.io.nasaapp.ui.App
 import arsensaliev.io.nasaapp.ui.BackButtonListener
 import coil.load
 import moxy.MvpAppCompatFragment
-import moxy.ktx.moxyPresenter
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
+import javax.inject.Inject
 
 class HomeFragment : MvpAppCompatFragment(), HomeView, BackButtonListener {
-    private val presenter by moxyPresenter {
-        HomePresenter().apply {
-            App.instance.appComponent.inject(this)
-        }
+    @Inject
+    @InjectPresenter
+    lateinit var presenter: HomePresenter
+
+    @ProvidePresenter
+    fun provide() = presenter
+
+    init {
+        App.instance.appComponent.inject(this)
     }
 
     private var ui: FragmentHomeBinding? = null
@@ -33,7 +40,6 @@ class HomeFragment : MvpAppCompatFragment(), HomeView, BackButtonListener {
         ui = null
     }
 
-
     override fun backPressed(): Boolean = presenter.backClick()
 
     companion object {
@@ -46,6 +52,6 @@ class HomeFragment : MvpAppCompatFragment(), HomeView, BackButtonListener {
             error(R.drawable.ic_baseline_error_outline_24)
             placeholder(R.drawable.ic_image)
         }
-
     }
+
 }

@@ -3,6 +3,7 @@ package arsensaliev.io.nasaapp.mvp.presenter.home
 import arsensaliev.io.nasaapp.mvp.model.entity.PictureOfTheDayData
 import arsensaliev.io.nasaapp.mvp.model.repo.IPictureOfTheDayRepo
 import arsensaliev.io.nasaapp.mvp.view.home.HomeView
+import arsensaliev.io.nasaapp.ui.App
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -11,17 +12,12 @@ import moxy.MvpPresenter
 import javax.inject.Inject
 import javax.inject.Named
 
-class HomePresenter : MvpPresenter<HomeView>() {
-    @field:Named("ui")
-    @Inject
-    lateinit var uiScheduler: Scheduler
-
-    @Inject
-    lateinit var pictureOfTheDayRepo: IPictureOfTheDayRepo
-
-    @Inject
-    lateinit var router: Router
-
+class HomePresenter @Inject constructor(
+    @param:Named("ui")
+    private val uiScheduler: Scheduler,
+    private val pictureOfTheDayRepo: IPictureOfTheDayRepo,
+    private val router: Router,
+) : MvpPresenter<HomeView>() {
     private val compositeDisposable = CompositeDisposable()
 
     fun backClick(): Boolean {
@@ -52,5 +48,9 @@ class HomePresenter : MvpPresenter<HomeView>() {
     override fun onDestroy() {
         compositeDisposable.dispose()
         super.onDestroy()
+    }
+
+    init {
+        App.instance.appComponent.inject(this)
     }
 }
