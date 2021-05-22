@@ -1,7 +1,10 @@
 package arsensaliev.io.nasaapp.ui.fragment.home
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import arsensaliev.io.nasaapp.R
 import arsensaliev.io.nasaapp.databinding.FragmentHomeBinding
@@ -54,4 +57,15 @@ class HomeFragment : MvpAppCompatFragment(), HomeView, BackButtonListener {
         }
     }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        ui?.inputLayout?.setEndIconOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data =
+                    Uri.parse("https://en.wikipedia.org/wiki/${ui?.inputEditText?.text.toString()}")
+            })
+        }
+
+    }
 }
