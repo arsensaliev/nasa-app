@@ -1,6 +1,7 @@
 package arsensaliev.io.nasaapp.mvp.presenter.home
 
 import arsensaliev.io.nasaapp.mvp.model.entity.PictureOfTheDayData
+import arsensaliev.io.nasaapp.mvp.model.navigation.IScreens
 import arsensaliev.io.nasaapp.mvp.model.repo.IPictureOfTheDayRepo
 import arsensaliev.io.nasaapp.mvp.view.home.HomeView
 import arsensaliev.io.nasaapp.ui.App
@@ -17,12 +18,17 @@ class HomePresenter @Inject constructor(
     private val uiScheduler: Scheduler,
     private val pictureOfTheDayRepo: IPictureOfTheDayRepo,
     private val router: Router,
+    private val screens: IScreens
 ) : MvpPresenter<HomeView>() {
     private val compositeDisposable = CompositeDisposable()
 
     fun backClick(): Boolean {
         router.exit()
         return true
+    }
+
+    fun openFilterPage() {
+        router.navigateTo(screens.filter())
     }
 
     override fun onFirstViewAttach() {
@@ -37,6 +43,8 @@ class HomePresenter @Inject constructor(
             .observeOn(uiScheduler)
             .subscribe({ picture ->
                 picture.url?.let { viewState.setImage(it) }
+                picture.explanation?.let { viewState.setDescription(it) }
+                picture.title?.let { viewState.setTitle(it) }
             }, {
                 it.printStackTrace()
                 it.message?.let { it1 -> viewState.setImage(it1) }

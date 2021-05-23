@@ -6,4 +6,6 @@ import moxy.viewstate.strategy.alias.AddToEndSingle
 @AddToEndSingle
 interface HomeView : MvpView {
     fun setImage(url: String)
+    fun setDescription(text: String)
+    fun setTitle(text: String)
 }
