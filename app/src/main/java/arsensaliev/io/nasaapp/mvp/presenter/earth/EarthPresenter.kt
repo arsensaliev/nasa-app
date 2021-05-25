@@ -1,9 +1,7 @@
-package arsensaliev.io.nasaapp.mvp.presenter.home
+package arsensaliev.io.nasaapp.mvp.presenter.earth
 
-import arsensaliev.io.nasaapp.mvp.model.entity.PictureOfTheDayData
-import arsensaliev.io.nasaapp.mvp.model.navigation.IScreens
-import arsensaliev.io.nasaapp.mvp.model.repo.IPictureOfTheDayRepo
-import arsensaliev.io.nasaapp.mvp.view.home.HomeView
+import arsensaliev.io.nasaapp.mvp.model.repo.INasaApiRequests
+import arsensaliev.io.nasaapp.mvp.view.earth.EarthView
 import arsensaliev.io.nasaapp.ui.App
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
@@ -13,23 +11,15 @@ import moxy.MvpPresenter
 import javax.inject.Inject
 import javax.inject.Named
 
-class HomePresenter @Inject constructor(
+class EarthPresenter @Inject constructor(
     @param:Named("ui")
     private val uiScheduler: Scheduler,
-    private val pictureOfTheDayRepo: IPictureOfTheDayRepo,
+    @param:Named("earthImagesRepo")
+    private val nasaApiRequests: INasaApiRequests,
     private val router: Router,
-    private val screens: IScreens
-) : MvpPresenter<HomeView>() {
+) : MvpPresenter<EarthView>() {
     private val compositeDisposable = CompositeDisposable()
 
-    fun backClick(): Boolean {
-        router.exit()
-        return true
-    }
-
-    fun openFilterPage() {
-        router.navigateTo(screens.filter())
-    }
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -37,14 +27,11 @@ class HomePresenter @Inject constructor(
     }
 
     private fun loadData() {
-        var post: PictureOfTheDayData? = null
-
-        val disposable: Disposable = pictureOfTheDayRepo.getPictureOfTheDay()
+        val disposable: Disposable = nasaApiRequests.getLastEarthImages()
             .observeOn(uiScheduler)
-            .subscribe({ picture ->
-                picture.url?.let { viewState.setImage(it) }
-                picture.explanation?.let { viewState.setDescription(it) }
-                picture.title?.let { viewState.setTitle(it) }
+            .subscribe({ item ->
+                val earthImageItem = item.first()
+                viewState.setImage(earthImageItem.fullImagePath)
             }, {
                 it.printStackTrace()
                 it.message?.let { it1 -> viewState.setImage(it1) }
@@ -56,6 +43,11 @@ class HomePresenter @Inject constructor(
     override fun onDestroy() {
         compositeDisposable.dispose()
         super.onDestroy()
+    }
+
+    fun backClick(): Boolean {
+        router.exit()
+        return true
     }
 
     init {

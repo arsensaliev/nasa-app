@@ -4,6 +4,7 @@ import com.github.terrakok.cicerone.Screen
 
 
 interface IScreens {
-    fun home(): Screen
-    fun filter(): Screen
+    fun earth(): Screen
+    fun apod(): Screen
+    fun settings(): Screen
 }
