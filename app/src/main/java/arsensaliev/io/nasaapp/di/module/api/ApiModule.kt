@@ -1,5 +1,6 @@
 package arsensaliev.io.nasaapp.di.module.api
 
+import arsensaliev.io.nasaapp.BuildConfig
 import arsensaliev.io.nasaapp.mvp.model.api.IDataSource
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -15,7 +16,7 @@ class ApiModule {
     @Singleton
     @Provides
     fun api(gson: Gson): IDataSource = Retrofit.Builder()
-        .baseUrl("https://api.nasa.gov/")
+        .baseUrl(BuildConfig.BASE_API_URL)
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()

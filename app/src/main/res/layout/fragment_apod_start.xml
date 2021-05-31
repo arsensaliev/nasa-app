@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/dark_background"
+    tools:context="ui.fragment.apod.ApodFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp">
+        app:layoutDescription="@xml/motion_scene"
+        android:paddingStart="@dimen/apod_motion_padding"
+        android:paddingEnd="@dimen/apod_motion_padding"
+        android:paddingTop="@dimen/apod_motion_padding"
+        android:paddingBottom="@dimen/apod_motion_padding">
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_layout"
@@ -23,7 +30,7 @@
             app:endIconDrawable="@drawable/ic_icons8_wikipedia_logo"
             app:endIconMode="custom"
             app:helperText="@string/wiki_helper_text"
-            app:layout_constraintBottom_toTopOf="@+id/image_view"
+            app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -40,12 +47,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:contentDescription="@string/photo_of_the_day_stub"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_image" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="parent"
+            tools:src="@drawable/ic_no_photo_vector" />
+
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
     <include layout="@layout/bottom_sheet_layout" />
 

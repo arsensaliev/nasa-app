@@ -3,4 +3,12 @@
     <string name="photo_of_the_day_stub">Description</string>
     <string name="search_wiki">Искать в википедии</string>
     <string name="wiki_helper_text">Википедия</string>
+    <string name="menu_1">Earth</string>
+    <string name="menu_2">Mars</string>
+    <string name="menu_3">Weather</string>
+    <string name="menu_4">APOD</string>
+    <string name="menu_5">Settings</string>
+    <string name="earth_btn_filter">Filter</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

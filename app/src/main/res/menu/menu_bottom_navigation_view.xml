@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_view_earth"
+        android:icon="@drawable/ic_earth"
+        android:title="@string/menu_1" />
+
+    <item
+        android:id="@+id/bottom_view_mars"
+        android:icon="@drawable/ic_mars"
+        android:title="@string/menu_2" />
+
+    <item
+        android:id="@+id/bottom_view_weather"
+        android:icon="@drawable/ic_system"
+        android:title="@string/menu_3" />
+
+    <item
+        android:id="@+id/bottom_view_apod"
+        android:icon="@drawable/ic_telescope"
+        android:title="@string/menu_4" />
+
+    <item
+        android:id="@+id/bottom_view_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/menu_5" />
+
+</menu>
