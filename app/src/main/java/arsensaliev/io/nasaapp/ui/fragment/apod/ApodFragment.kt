@@ -39,6 +39,10 @@ class ApodFragment : MvpAppCompatFragment(), ApodView, BackButtonListener {
         bottomSheetUi.findViewById<TextView>(R.id.bottom_sheet_description).text = description
     }
 
+    override fun startAnimation() {
+        ui?.main?.transitionToEnd()
+    }
+
     override fun setImage(url: String) {
         ui?.imageView?.load(url) {
             lifecycle(this@ApodFragment)

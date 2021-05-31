@@ -1,7 +1,5 @@
 package arsensaliev.io.nasaapp.mvp.presenter.apod
 
-import android.util.Log
-import android.widget.Toast
 import arsensaliev.io.nasaapp.mvp.model.repo.INasaApiRequests
 import arsensaliev.io.nasaapp.mvp.view.apod.ApodView
 import arsensaliev.io.nasaapp.ui.App
@@ -30,6 +28,7 @@ class ApodPresenter @Inject constructor(
                 apodData.url.let { viewState.setImage(it) }
                 apodData.title.let { viewState.setTitle(it) }
                 apodData.explanation.let { viewState.setDescription(it) }
+                viewState.startAnimation()
             }, {
                 it.printStackTrace()
                 it.message?.let { it1 -> viewState.setImage(it1) }

@@ -8,4 +8,5 @@ interface ApodView : MvpView {
     fun setImage(url: String)
     fun setTitle(title: String)
     fun setDescription(description: String)
+    fun startAnimation()
 }

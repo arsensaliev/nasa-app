@@ -3,9 +3,8 @@
     <Transition
         motion:constraintSetEnd="@layout/fragment_apod"
         motion:constraintSetStart="@layout/fragment_apod_start"
-        motion:duration="500">
+        motion:duration="1000">
 
-        <OnClick motion:targetId="@id/wiki_button" />
     </Transition>
 
 </MotionScene>
