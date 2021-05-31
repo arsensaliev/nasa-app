@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import arsensaliev.io.nasaapp.R
-import arsensaliev.io.nasaapp.databinding.FragmentApodBinding
+import arsensaliev.io.nasaapp.databinding.FragmentApodStartBinding
 import arsensaliev.io.nasaapp.mvp.presenter.apod.ApodPresenter
 import arsensaliev.io.nasaapp.mvp.view.apod.ApodView
 import arsensaliev.io.nasaapp.ui.App
@@ -30,7 +30,7 @@ class ApodFragment : MvpAppCompatFragment(), ApodView, BackButtonListener {
     @ProvidePresenter
     fun provide() = presenter
 
-    private var ui: FragmentApodBinding? = null
+    private var ui: FragmentApodStartBinding? = null
     lateinit var bottomSheetUi: ConstraintLayout
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
@@ -70,7 +70,7 @@ class ApodFragment : MvpAppCompatFragment(), ApodView, BackButtonListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentApodBinding.inflate(inflater, container, false).also { ui = it }.root
+    ) = FragmentApodStartBinding.inflate(inflater, container, false).also { ui = it }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
